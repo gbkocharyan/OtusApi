@@ -33,10 +33,9 @@ public abstract class BaseService {
 
   protected ValidatableResponse get(String userName, String endpoint) {
     return setupRequest()
-        .pathParam("username", userName)
         .log().all()
         .when()
-        .get(endpoint)
+        .get(endpoint + "/" + userName)
         .then()
         .log().all();
   }
