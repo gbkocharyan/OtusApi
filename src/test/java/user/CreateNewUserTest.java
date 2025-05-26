@@ -1,4 +1,4 @@
-package petStore.user;
+package user;
 
 import dto.CreateUserResponse;
 import dto.User;
@@ -43,23 +43,23 @@ public class CreateNewUserTest {
 
   }
 
-    @Test
-    @DisplayName("Verify user creation without email and phone")
-    void createUserWithoutSomeParameters() {
-      int id = 15;
+  @Test
+  @DisplayName("Verify user creation without email and phone")
+  void createUserWithoutSomeParameters() {
+    int id = 15;
 
-      User user = User
-          .builder()
-          .id(id)
-          .username("admin")
-          .firstName("Mike")
-          .lastName("Anderson")
-          .password("123456")
-          .userStatus(1)
-          .build();
+    User user = User
+        .builder()
+        .id(id)
+        .username("admin")
+        .firstName("Mike")
+        .lastName("Anderson")
+        .password("123456")
+        .userStatus(1)
+        .build();
 
-      new UserService().createUser(user)
-          .statusCode(HttpStatus.SC_OK)
-          .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemas/createUserResponse.json"));
-    }
+    new UserService().createUser(user)
+        .statusCode(HttpStatus.SC_OK)
+        .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemas/createUserResponse.json"));
+  }
 }

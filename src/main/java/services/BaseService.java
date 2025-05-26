@@ -10,11 +10,11 @@ import io.restassured.specification.RequestSpecification;
 
 public abstract class BaseService {
 
-  private final String BASE_URL = System.getProperty("baseUrl", "https://petstore.swagger.io/v2");
+  private final String baseUrl = System.getProperty("baseUrl", "https://petstore.swagger.io/v2");
 
   private final RequestSpecification spec = RestAssured
       .given()
-      .baseUri(BASE_URL)
+      .baseUri(baseUrl)
       .contentType(ContentType.JSON);
 
   private RequestSpecification setupRequest() {
