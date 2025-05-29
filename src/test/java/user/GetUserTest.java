@@ -2,11 +2,10 @@ package user;
 
 import dto.User;
 import helpers.UserHelper;
-import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import services.UserService;
+import java.time.Duration;
 
 public class GetUserTest {
 
@@ -17,10 +16,9 @@ public class GetUserTest {
     UserHelper userHelper = new UserHelper();
     String userName = userHelper.createUser().getUsername();
 
-    User user = new UserService().getUser(userName)
-          .statusCode(HttpStatus.SC_OK)
-          .extract().as(User.class);
+    User user = userHelper.waitForUserCreation(userName, Duration.ofSeconds(10));
 
     Assertions.assertEquals(userName, user.getUsername(), "Incorrect username");
   }
+
 }
