@@ -12,11 +12,10 @@ public class GetUserTest {
 
   @Test
   @DisplayName("Get user and validate response json")
-  void getUser() throws InterruptedException {
+  void getUser() {
 
     UserHelper userHelper = new UserHelper();
     String userName = userHelper.createUser().getUsername();
-    Thread.sleep(15000); //After creating a user, it takes time to be able to get it
 
     User user = new UserService().getUser(userName)
           .statusCode(HttpStatus.SC_OK)

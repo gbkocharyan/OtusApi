@@ -23,6 +23,8 @@
         <assertj.version>3.27.3</assertj.version>
         <junit.jupiter.version>5.12.2</junit.jupiter.version>
         <maven.checkstyle.version>3.6.0</maven.checkstyle.version>
+        <maven.spotbugs.version>4.9.3.0</maven.spotbugs.version>
+        <javafaker.version>1.0.2</javafaker.version>
     </properties>
 
     <dependencies>
@@ -65,6 +67,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${javafaker.version}</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -88,6 +96,21 @@
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     <configLocation>${project.build.sourceDirectory}/../resources/checkstyle.xml</configLocation>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>analyze-compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>${maven.spotbugs.version}</version>
                 <executions>
                     <execution>
                         <id>analyze-compile</id>

@@ -1,17 +1,18 @@
 package helpers;
 
+import com.github.javafaker.Faker;
 import dto.User;
 import services.UserService;
-import java.util.Random;
 
 public class UserHelper {
 
+  private final Faker faker = new Faker();
+
+
   public User createUser() {
 
-    Random random = new Random();
-    int randomId = random.nextInt(100) + 1;
-    String randomUserName = generateRandomString();
-
+    int randomId = faker.number().numberBetween(1, 101);
+    String randomUserName = faker.name().username();
 
     User user = User
         .builder()
@@ -22,19 +23,6 @@ public class UserHelper {
     new UserService().createUser(user);
 
     return user;
-  }
-
-  private String generateRandomString() {
-    String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    Random random = new Random();
-    StringBuilder stringBuilder = new StringBuilder();
-
-    for (int i = 0; i < 6; i++) {
-      int index = random.nextInt(characters.length());
-      stringBuilder.append(characters.charAt(index));
-    }
-
-    return stringBuilder.toString();
   }
 
 }
